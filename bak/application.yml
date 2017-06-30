@@ -1,20 +1,2 @@
 server:
   port: 8166
-spring:
-  application:
-    name: osmcs-config-client-demo
-  cloud:
-    config:
-      profile: centos #配置文件后缀，具体参见 http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.0.RELEASE/
-      label: master #分支
-      discovery:
-        enabled: true # 默认false，设为true表示使用注册中心中的configserver配置而不自己配置configserver的uri
-        service-id: osmcs-config-manage # 指定config server在服务发现中的serviceId，默认为：configserver
-eureka:
-  client:
-    service-url:
-      defaultZone: http://discovery1:8761/eureka/,http://discovery2:8762/eureka/
-
-management:
-  security:
-    enabled: false #不设置有问题profile: profile-default

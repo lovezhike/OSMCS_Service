@@ -1,0 +1,69 @@
+server:
+  port: 7002
+
+spring:
+  profiles: dev
+
+  http:
+    multipart:
+      max-file-size: 600Mb
+      max-request-size: 1000Mb
+  redis:
+      host: localhost         #10.139.9.101
+      port: 6379
+      # Redis服务器连接密码（默认为空）
+      password:
+      # 连接池最大连接数（使用负值表示没有限制）
+      pool:
+        max-active: 8
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
+      # 连接池中的最大空闲连接
+        max-idle: 8
+      # 连接池中的最小空闲连接
+        min-idle: 0
+      # 连接超时时间（毫秒）
+      timeout: 0
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/osmcs
+    username: root
+    password: 1
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+
+
+mybatis:
+  mapperLocations: classpath*:mapper/*.xml
+  config-location: classpath:mybatis-config.xml
+
+mapper:
+    mappers: tk.mybatis.spring.mapper.MapperScannerConfigurer
+#        - tk.mybatis.springboot.util.MyMapper
+    not-empty: false
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery1:8761/eureka/,http://discovery2:8762/eureka/
